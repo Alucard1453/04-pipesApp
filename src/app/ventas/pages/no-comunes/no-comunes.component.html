@@ -1,0 +1,82 @@
+<div class="text-layout">
+    <h1>Pipes no tan comunes</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en Common Module.
+    </p>
+</div>
+
+<div class="grid">
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+            <p>
+                Saludos {{nombre}}, es un placer 
+                <!-- Este pipe permite seleccionar de una lista de opciones la palabra a mostrar
+                     con base a una propiedad, en este caso en base al genero seleccionara una 
+                     palabra, para ello se usa i18nSelect y se le pasa el objeto con la lista 
+                     de palabras posibles, este objeto es obligatorio. -->
+                {{ genero | i18nSelect:invitacionMap }}
+                a nuestro evento.
+            </p>
+            <button pButton 
+                    type="button" 
+                    label="Cambiar Persona" 
+                    (click)="cambiarCliente()"
+                    class="p-button-help">
+            </button>
+        </p-fieldset>
+    </div>
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
+            <p>
+                Actualmente tenemos {{clientes.length | i18nPlural:clientesMap}}
+            </p>
+            <button pButton 
+                    type="button" 
+                    label="Borrar Cliente" 
+                    (click)="borrarCliente()"
+                    class="p-button-danger">
+            </button>
+        </p-fieldset>
+    </div>
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="Slice Pipe" [toggleable]="true">
+            <b>Original</b>
+            <pre>{{ clientes }}</pre>
+            <b>slice:0:2</b>
+            <pre>{{ clientes | slice:0:2 }}</pre>
+            <b>slice:1:2</b>
+            <pre>{{ clientes | slice:1:2 }}</pre>
+            <b>slice:1:4</b>
+            <pre>{{ clientes | slice:1:4 }}</pre>
+            <b>slice:3:3</b>
+            <pre>{{ clientes | slice:3:3 }}</pre>
+        </p-fieldset>
+    </div>
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            <pre>{{ heroes | json }}</pre>
+        </p-fieldset>
+    </div>
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="Key Value Pipe" [toggleable]="true">
+            <ul>
+                <!-- Este pipe permite obtener el par de valores de los atributos de un objeto json
+                     para poder recuperar sus propiedades. -->
+                <li *ngFor="let item of persona | keyvalue">
+                    <b>{{ item.key | titlecase }}</b> : {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+    <div class="lg:col-6 md:col-12">
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <!-- Aunque paresca que es el mismo observable, se trata de dos observables independientes, 
+                 ya que cada async esta haciendo la suscripcion por su cuenta -->
+            <pre *ngIf="!(miObservable | async)">Resolviendo observable</pre>
+            <pre>{{ miObservable | async }}</pre>
+
+            <pre *ngIf="!(valorPromesa | async)">Resolviendo promesa</pre>
+            <pre>{{ valorPromesa | async }}</pre>
+        </p-fieldset>
+    </div>
+</div>
